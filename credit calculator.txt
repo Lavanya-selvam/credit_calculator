@@ -43,7 +43,7 @@ else:
         else:
             if args.principal is not None and args.periods is not None and args.interest is not None:
                 i = args.interest / 1200
-                cuota = ceil((args.principal * i) / (1 - ((1 + i) ** - args.periods)))
+                cuota = ceil(args.principal * (i * pow(1 + i, args.periods)) / (pow(1 + i, args.periods) - 1))
                 overpayment = (cuota * args.periods) - args.principal
                 print(f"Your annuity payment = {cuota}!")
                 print(f"Overpayment = {overpayment}")
@@ -72,7 +72,7 @@ else:
                         print(f"Overpayment = {overpayment}")
             elif args.payment is not None and args.periods is not None and args.interest is not None:
                 i = args.interest / 1200
-                principal = round(args.payment * ((1 - ((1 + i) ** - args.periods)) / i))
+                principal = round(args.payment / ((i * pow(1 + i, args.periods)) / (pow(1 + i, args.periods) - 1)))
                 overpayment = (args.payment * args.periods) - principal
                 print(f"Your credit principal = {principal}!")
                 print(f"Overpayment = {overpayment}")
